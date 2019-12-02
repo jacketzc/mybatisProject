@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jac.mapper.UserMapper">
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="id">
+        insert into user (username,birthday,sex,address)
+        value
+        (#{username},#{birthday},#{sex},#{address})
+    </insert>
+    <delete id="deleteUser">
+        delete from user where username=#{id}
+    </delete>
+    <select id="findById" resultType="user">
+        select * from user where id = #{hehe}
+    </select>
+    <select id="findByUserId" resultType="user">
+        select * from user where id = #{user.id}
+    </select>
+    <resultMap id="userMap" type="user">
+        <id property="id" column="id_"/>
+        <result property="username" column="username_"/>
+        <result property="sex" column="sex_"/>
+        <result property="address" column="address_"/>
+    </resultMap>
+    <select id="findByName"  resultType="user">
+        select * from user where username like '%${username}%'
+    </select>
+    <select id="findByAny" resultType="user">
+        select * from user
+        <where>
+            <if test="sex!=null and sex!=''">
+                sex = #{sex}
+            </if>
+            <if test="username!=null and username!=''">
+                AND username like '%${username}%'
+            </if>
+        </where>
+    </select>
+</mapper>

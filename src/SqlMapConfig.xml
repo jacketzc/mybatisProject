@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <properties resource="db.properties"/>
+    <typeAliases>
+        <typeAlias type="com.jac.model.User" alias="user"/>
+    </typeAliases>
+
+    <!--配置mybatis环境-->
+    <environments default="development">
+        <environment id="development">
+            <!--配置事务控制为JDBC-->
+            <transactionManager type="JDBC"/>
+            <!--配置数据库连接池为dbcp-->
+            <dataSource type="POOLED">
+                <property name="driver" value="${driverClassName}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!--加载映射文件-->
+    <mappers>
+<!--        <mapper resource="sqlmap/User.xml"/>-->
+<!--        <mapper resource="sqlmap/BlogMapper.xml"/>-->
+        <mapper resource="com/jac/mapper/xml/UserMapper.xml"/>
+        <package name="com.jac.mapper.xml" />
+    </mappers>
+</configuration>
